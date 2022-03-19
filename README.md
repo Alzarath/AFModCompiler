@@ -3,7 +3,8 @@ The Acolyte Fight Mod Compiler. Used to compile Acolyte Fight mod projects into 
 
 ## Usage
 ```
-usage: AFModCompiler.py [-h] [--output, -o [OUTPUT_FILE]] [--max-projectile-depth [MAX_PROJECTILE_DEPTH]]
+usage: AFModCompiler.py [-h] [--output, -o [OUTPUT_FILE]]
+                        [--max-projectile-depth [MAX_PROJECTILE_DEPTH]]
                         [--max-parent-depth [MAX_PARENT_DEPTH]]
                         [Directory]
 
@@ -15,12 +16,15 @@ positional arguments:
 options:
   -h, --help            show this help message and exit
   --output, -o [OUTPUT_FILE]
-                        Set the destination file that the mod will be compiled to
+                        Set the destination file that the mod will be compiled
+                        to
   --max-projectile-depth [MAX_PROJECTILE_DEPTH]
-                        Sets the maximum depth projectiles will generate in the case of recursion or sufficiently long
+                        Sets the maximum depth projectiles will generate in
+                        the case of recursion or sufficiently long
                         projectile chains
   --max-parent-depth [MAX_PARENT_DEPTH]
-                        Sets the maximum depth parents will be searched to generate in the case of nested parent chains and
+                        Sets the maximum depth parents will be searched to
+                        generate in the case of nested parent chains and
                         infinite loops
 ```
 

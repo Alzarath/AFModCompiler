@@ -37,6 +37,7 @@ The project directory name does not matter, but the files `mod.json` and all con
 ```
 project_directory/
 ├─ constants/
+│  ├─ ai.js
 │  ├─ audio.json
 │  ├─ choices.json
 │  ├─ hero.json

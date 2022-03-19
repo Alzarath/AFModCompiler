@@ -96,7 +96,7 @@ An obstacle is generated from a json file where the obstacle entry uses the file
 
 AFModCompiler introduces the concept of Projectile Templating.
 
-A projectile template string can be used in place of a `projectile`'s value. For clarity, I use `"ProjectileTemplate:fireball"` where projectileTemplate is the name of a projectile template file (without the file extension), but you may excluse `ProjectileTemplate:` and it should also function (untested).
+A projectile template string can be used in place of a `projectile`'s value. For clarity, I use `"ProjectileTemplate:fireball"` where projectileTemplate is the name of a projectile template file (without the file extension), but you may exclude `ProjectileTemplate:` and it should also function (untested).
 
 ```json
 "projectile": "ProjectileTemplate:fireball"

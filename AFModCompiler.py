@@ -48,24 +48,41 @@ def get_data(directory):
 def get_constants(directory):
 	constant_info = {}
 
-	matchmaking_file = directory.joinpath("matchmaking.json")
-	world_file = directory.joinpath("world.json")
-	hero_file = directory.joinpath("hero.json")
-	obstacle_file = directory.joinpath("obstacle.json")
-	choices_file = directory.joinpath("choices.json")
-	visuals_file = directory.joinpath("visuals.json")
-	audio_file = directory.joinpath("audio.json")
-	tips_file = directory.joinpath("tips.json")
+	# AI Javascript
+	ai_file = directory.joinpath("ai.js")
+	constant_info["Code"] = ai_file.read_text()
 
-	constant_info["Matchmaking"] = json.loads(matchmaking_file.read_text())
-	constant_info["Matchmaking"] = json.loads(matchmaking_file.read_text())
-	constant_info["World"] = json.loads(world_file.read_text())
-	constant_info["Hero"] = json.loads(hero_file.read_text())
-	constant_info["Obstacle"] = json.loads(obstacle_file.read_text())
-	constant_info["Choices"] = json.loads(choices_file.read_text())
-	constant_info["Visuals"] = json.loads(visuals_file.read_text())
+	# Audio constants
+	audio_file = directory.joinpath("audio.json")
 	constant_info["Audio"] = json.loads(audio_file.read_text())
+
+	# Choices constants
+	choices_file = directory.joinpath("choices.json")
+	constant_info["Choices"] = json.loads(choices_file.read_text())
+
+	# Hero constants
+	hero_file = directory.joinpath("hero.json")
+	constant_info["Hero"] = json.loads(hero_file.read_text())
+
+	# Matchmaking constants
+	matchmaking_file = directory.joinpath("matchmaking.json")
+	constant_info["Matchmaking"] = json.loads(matchmaking_file.read_text())
+
+	# Obstacle constants
+	obstacle_file = directory.joinpath("obstacle.json")
+	constant_info["Obstacle"] = json.loads(obstacle_file.read_text())
+
+	# Tips list
+	tips_file = directory.joinpath("tips.json")
 	constant_info["Tips"] = json.loads(tips_file.read_text())
+
+	# Visuals constants
+	visuals_file = directory.joinpath("visuals.json")
+	constant_info["Visuals"] = json.loads(visuals_file.read_text())
+
+	# World constants
+	world_file = directory.joinpath("world.json")
+	constant_info["World"] = json.loads(world_file.read_text())
 
 	return constant_info
 

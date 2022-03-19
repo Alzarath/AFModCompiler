@@ -69,6 +69,7 @@ Mod information is located in the `mod.json` file in the root directory. The fil
 
 Constants are located in the `constants` directory. There are 8 constant files:
 
+* `ai.js` contains javascript code for the NPC's AI. Formatted as a standard Javascript file.
 * `audio.json` contains global settings for the game's audio. Formatted as a key-less dictionary value.
 * `choices.json` contains global settings for players' spell selection. Formatted as a key-less dictionary value.
 * `hero.json` contains global settings for player characters. Formatted as a key-less dictionary value.

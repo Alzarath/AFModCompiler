@@ -26,7 +26,7 @@ options:
 
 ## Expectations
 
-A mod project is expected to follow a specific directory and file sturcture. The file is expected to contain a single key-less dictionary value.
+A mod project is expected to follow a specific directory and file sturcture.
 
 ```
 project_directory/
@@ -57,7 +57,7 @@ project_directory/
 
 ### Mod Info
 
-Mod information is located in the `mod.json` file in the root directory.
+Mod information is located in the `mod.json` file in the root directory. The file is expected to contain a single key-less dictionary value.
 
 ### Constants
 

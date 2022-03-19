@@ -26,7 +26,9 @@ options:
 
 ## Expectations
 
-A mod project is expected to follow a specific directory and file sturcture. No singular file or directory is required, but included directories and files must be named appropriately for everything to function.
+A mod project is expected to follow a specific directory and file sturcture, although no singular file or directory is required.
+
+The project directory name does not matter, but the files `mod.json` and all constants must have their appropriate names to be included. Objects in the other folders do not need to follow any particular naming scheme, but object names should be addressed consistently when it comes to parenting and templating.
 
 ```
 project_directory/

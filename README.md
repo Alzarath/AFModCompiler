@@ -26,7 +26,7 @@ options:
 
 ## Expectations
 
-A mod project is expected to follow a specific directory and file sturcture.
+A mod project is expected to follow a specific directory and file sturcture. No singular file or directory is required, but included directories and files must be named appropriately for everything to function.
 
 ```
 project_directory/

@@ -50,44 +50,55 @@ def get_constants(directory):
 
 	# AI Javascript
 	ai_file = directory.joinpath("ai.js")
-	constant_info["Code"] = ai_file.read_text()
+	if ai_file.exists() and not ai_file.is_dir():
+		constant_info["Code"] = ai_file.read_text()
 
 	# Audio constants
 	audio_file = directory.joinpath("audio.json")
-	constant_info["Audio"] = json.loads(audio_file.read_text())
+	if audio_file.exists() and not audio_file.is_dir():
+		constant_info["Audio"] = json.loads(audio_file.read_text())
 
 	# Choices constants
 	choices_file = directory.joinpath("choices.json")
-	constant_info["Choices"] = json.loads(choices_file.read_text())
+	if choices_file.exists() and not choices_file.is_dir():
+		constant_info["Choices"] = json.loads(choices_file.read_text())
 
 	# Hero constants
 	hero_file = directory.joinpath("hero.json")
-	constant_info["Hero"] = json.loads(hero_file.read_text())
+	if hero_file.exists() and not hero_file.is_dir():
+		constant_info["Hero"] = json.loads(hero_file.read_text())
 
 	# Matchmaking constants
 	matchmaking_file = directory.joinpath("matchmaking.json")
-	constant_info["Matchmaking"] = json.loads(matchmaking_file.read_text())
+	if matchmaking_file.exists() and not matchmaking_file.is_dir():
+		constant_info["Matchmaking"] = json.loads(matchmaking_file.read_text())
 
 	# Obstacle constants
 	obstacle_file = directory.joinpath("obstacle.json")
-	constant_info["Obstacle"] = json.loads(obstacle_file.read_text())
+	if obstacle_file.exists() and not obstacle_file.is_dir():
+		constant_info["Obstacle"] = json.loads(obstacle_file.read_text())
 
 	# Tips list
 	tips_file = directory.joinpath("tips.json")
-	constant_info["Tips"] = json.loads(tips_file.read_text())
+	if tips_file.exists() and not tips_file.is_dir():
+		constant_info["Tips"] = json.loads(tips_file.read_text())
 
 	# Visuals constants
 	visuals_file = directory.joinpath("visuals.json")
-	constant_info["Visuals"] = json.loads(visuals_file.read_text())
+	if visuals_file.exists() and not visuals_file.is_dir():
+		constant_info["Visuals"] = json.loads(visuals_file.read_text())
 
 	# World constants
 	world_file = directory.joinpath("world.json")
-	constant_info["World"] = json.loads(world_file.read_text())
+	if world_file.exists() and not world_file.is_dir():
+		constant_info["World"] = json.loads(world_file.read_text())
 
 	return constant_info
 
 def get_mod_info(path):
-	return json.loads(path.read_text())
+	if path.exists() and not path.is_dir():
+		return json.loads(path.read_text())
+	return {}
 
 def template_projectile(spell, projectiles):
 	returned_spell = spell.copy()

@@ -53,7 +53,7 @@ options:
 
 A mod project is expected to follow a specific directory and file sturcture, although no singular file or directory is required.
 
-The project directory name does not matter, but the files `mod.json` and all constants must have their appropriate names to be included. Objects in the other folders do not need to follow any particular naming scheme, but object names should be addressed consistently when it comes to parenting and templating. An example of a project directory and file structure is as follows:
+The project directory name does not matter, but the files **mod.json** and all constants must have their appropriate names to be included. Objects in the other folders do not need to follow any particular naming scheme, but object names should be addressed consistently when it comes to parenting and templating. An example of a project directory and file structure is as follows:
 
 ```
 project_directory/
@@ -85,11 +85,11 @@ project_directory/
 
 ### Mod Info
 
-Mod information is located in the `mod.json` file in the root directory. The file is expected to contain a single key-less dictionary value.
+Mod information is located in the **mod.json** file in the root directory. The file is expected to contain a single key-less dictionary value.
 
 #### Mod Info example
 
-The following example is the contents of a default mod that should be located in the file `project_directory/mod.json`
+The following example is the contents of a default mod that should be located in the file **project_directory/mod.json**
 
 <details>
  <summary><b>Click to Reveal: <code>mod.json</code></b></summary>
@@ -111,23 +111,23 @@ The following example is the contents of a default mod that should be located in
 
 ### Constants
 
-Constants are located in the `constants` directory. There are 8 constant files:
+Constants are located in the **constants** directory. There are 8 constant files:
 
-* `ai.js` contains javascript code for the NPC's AI. Formatted as a standard Javascript file.
-* `audio.json` contains global settings for the game's audio. Formatted as a key-less dictionary value.
-* `choices.json` contains global settings for players' spell selection. Formatted as a key-less dictionary value.
-* `hero.json` contains global settings for player characters. Formatted as a key-less dictionary value.
-* `matchmaking.json` contains global settings for the game's matchmaking. Formatted as a key-less dictionary value.
-* `obstacle.json` contains global settings for the game's obstacles. Formatted as a key-less dictionary value.
-* `tips.json` contains randomized tips for the game. Formatted as a list.
-* `visuals.json` contains global settings for the game's visuals. Formatted as a key-less dictionary value.
-* `world.json` contains global settings for the game maps. Formatted as a key-less dictionary value.
+* **ai.js** contains javascript code for the NPC's AI. Formatted as a standard Javascript file.
+* **audio.json** contains global settings for the game's audio. Formatted as a key-less dictionary value.
+* **choices.json** contains global settings for players' spell selection. Formatted as a key-less dictionary value.
+* **hero.json** contains global settings for player characters. Formatted as a key-less dictionary value.
+* **matchmaking.json** contains global settings for the game's matchmaking. Formatted as a key-less dictionary value.
+* **obstacle.json** contains global settings for the game's obstacles. Formatted as a key-less dictionary value.
+* **tips.json** contains randomized tips for the game. Formatted as a list.
+* **visuals.json** contains global settings for the game's visuals. Formatted as a key-less dictionary value.
+* **world.json** contains global settings for the game maps. Formatted as a key-less dictionary value.
 
-Tips are the one file that expects a list `[]` rather than a dictionary `{}`. As it's how the game implements tips, tips in the `tips.json` file will replace all of the existing game's tips.
+Tips are the one file that expects a list `[]` rather than a dictionary `{}`. As it's how the game implements tips, tips in the **tips.json** file will replace all of the existing game's tips.
 
 ### Icons
 
-Icons are located in the `icons` directory. Sub-directories are acceptable, but not important.
+Icons are located in the **icons** directory. Sub-directories are acceptable, but not important.
 
 An icon is generated from a json file where the icon entry uses the file name without the file extension. Each icon file is expected to contain a single key-less dictionary value.
 
@@ -135,17 +135,17 @@ An icon is generated from a json file where the icon entry uses the file name wi
 
 There is no icon example due to copyright concerns. Look at other examples e.g. [Map Example](#map-example) to get an idea of how to format it.
 
-An icon `.json` file would be located in the `project_directory/icons/` directory.
+An icon **.json** file would be located in the **project_directory/icons/** directory.
 
 ### Maps
 
-Maps are located in the `maps` directory. Sub-directories are acceptable, but not important.
+Maps are located in the **maps** directory. Sub-directories are acceptable, but not important.
 
 A map is generated from a json file where the map entry uses the file name without the file extension. Each map file is expected to contain a single key-less dictionary value.
 
 #### Map Example
 
-The following examples is the contents of the Mirrors map (as of this writing) that might be located in the file `project_directory/maps/mirrors.json`
+The following examples is the contents of the Mirrors map (as of this writing) that might be located in the file **project_directory/maps/mirrors.json**
 
 <details>
  <summary><b>Click to Reveal: <code>mirrors.json</code></b></summary>
@@ -174,13 +174,13 @@ The following examples is the contents of the Mirrors map (as of this writing) t
 
 ### Obstacles
 
-Obstacles are located in the `obstacles` directory. Sub-directories are acceptable, but not important.
+Obstacles are located in the **obstacles** directory. Sub-directories are acceptable, but not important.
 
 An obstacle is generated from a json file where the obstacle entry uses the file name without the file extension. Each obstacle file is expected to contain a single key-less dictionary value.
 
 #### Obstacle Example
 
-The following example is the contents of the vanilla healing pool (as of this writing) that might be located in the file `project_directory/sounds/fireball.json`
+The following example is the contents of the vanilla healing pool (as of this writing) that might be located in the file **project_directory/sounds/fireball.json**
 
 <details>
   <summary><b>Click to Reveal: <code>healing.json</code></b></summary>
@@ -244,7 +244,7 @@ The following example is the contents of the vanilla healing pool (as of this wr
 
 AFModCompiler introduces the concept of Projectile Templating.
 
-A projectile template string can be used in place of a `projectile`'s value. For clarity, I use `"ProjectileTemplate:fireball"` where projectileTemplate is the name of a projectile template file (without the file extension), but you may exclude `ProjectileTemplate:` and it should also function (untested).
+A projectile template string can be used in place of a `projectile`'s value. For clarity, I use `"ProjectileTemplate:fireball"` where fireball is the name of a projectile template file (**projectiles/fireball.json**) without the file extension, but you may exclude `ProjectileTemplate:` and it should also function (untested).
 
 ```json
 "projectile": "ProjectileTemplate:fireball"
@@ -252,7 +252,7 @@ A projectile template string can be used in place of a `projectile`'s value. For
 
 These can be placed in place of a Spell's `projectile` field, or in place of a `spawn` behaviour's `projectile` field.
 
-Projectile Templates are located in the `projectiles` directory. Sub-directories are acceptable, but not important.
+Projectile Templates are located in the **projectiles** directory. Sub-directories are acceptable, but not important.
 
 A projectile is generated from a json file where the projectile template name uses the file name without the file extension. Each projectile file is expected to contain a single key-less dictionary value.
 
@@ -260,7 +260,7 @@ To avoid infinite loops, there is a limit to how many projectiles deep a project
 
 #### Projectile Example
 
-The following example is the contents of the Fireball's projectile dictionary (as of this writing) that might be located in the file `project_directory/projectiles/fireball.json`
+The following example is the contents of the Fireball's projectile dictionary (as of this writing) that might be located in the file **project_directory/projectiles/fireball.json**
 
 <details>
   <summary><b>Click to Reveal: <code>fireball.json</code></b></summary>
@@ -304,13 +304,13 @@ The following example is the contents of the Fireball's projectile dictionary (a
 
 ### Sounds
 
-Sounds are located in the `sounds` directory. Sub-directories are acceptable, but not important.
+Sounds are located in the **sounds** directory. Sub-directories are acceptable, but not important.
 
 A sound is generated from a json file where the sound entry uses the file name without the file extension. Each sound file is expected to contain a single key-less dictionary value.
 
 #### Sound Example
 
-The following example is the contents of the vanilla Fireball's sound effect (as of this writing) that might be located in the file `project_directory/sounds/fireball.json`
+The following example is the contents of the vanilla Fireball's sound effect (as of this writing) that might be located in the file **project_directory/sounds/fireball.json**
 
 <details>
   <summary><b>Click to Reveal: <code>fireball.json</code></b></summary>
@@ -334,13 +334,13 @@ The following example is the contents of the vanilla Fireball's sound effect (as
 
 ### Spells
 
-Spells are located in the `spells` directory. Sub-directories are acceptable, but not important.
+Spells are located in the **spells** directory. Sub-directories are acceptable, but not important.
 
 A spell is generated from a json file where the spell entry uses the file name without the file extension. Each spell file is expected to contain a single key-less dictionary value.
 
 #### Spell Example
 
-The following example is the contents of the vanilla Fireball (as of this writing) that might be located in the file `project_directory/spells/fireball.json`
+The following example is the contents of the vanilla Fireball (as of this writing) that might be located in the file **project_directory/spells/fireball.json**
 
 <details>
  <summary><b>Click to Reveal: <code>fireball.json</code></b></summary>
@@ -392,12 +392,12 @@ The following example is the contents of the vanilla Fireball (as of this writin
 ```
 </details>
 
-Note that the dictionary value of `"projectile"` could be replaced with a [Projectile Template](#projectiles) string (e.g. `"projectile": "ProjectileTemplate:fireball.json"`) to condense things here.
+Note that the `projectile`'s' dictionary value could be replaced with a [Projectile Template](#projectiles) string (e.g. `"projectile": "ProjectileTemplate:fireball.json"`) to condense things here.
 
 ## Parenting
 
-AFModCompiler checks for the key `"basedOn"` and uses its value (formatted as a file name without the extension) to generate a base object that the settings then overwrite.
+AFModCompiler checks for the key `basedOn` and uses its value (formatted as a file name without the extension) to generate a base object that the settings then overwrite.
 
-One thing to keep in mind is that you can only replace values in the root, so attempting to add something to a nested dictionary or list (e.g. a `"renderers"` list in a projectile) will instead overwrite it. Additionally, the compiler only searches a root object and will not search nested objects.
+One thing to keep in mind is that you can only replace values in the root, so attempting to add something to a nested dictionary or list (e.g. a `renderers` list in a projectile) will instead overwrite it. Additionally, the compiler only searches a root object and will not search nested objects.
 
 It is possible to parent an object from an object that itself has a parent. There is a limit of 50 (that can be overwritten with the `--max-parent-depth` argument) to avoid infinite loops.

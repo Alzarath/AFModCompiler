@@ -6,11 +6,14 @@ The Acolyte Fight Mod Compiler. Used to compile Acolyte Fight mod projects into 
 * [Usage](#usage)
 * [Project Structure](#project-structure)
   * [Mod Info](#mod-info)
+    * [Example](#mod-info-example)
   * [Constants](#constants)
   * [Icons](#icons)
+    * [Example](#icon-example)
   * [Maps](#maps)
     * [Example](#map-example)
   * [Obstacles](#obstacles)
+    * [Example](#obstacle-example)
   * [Projectiles](#projectiles)
     * [Example](#projectile-example)
   * [Sounds](#sounds)
@@ -84,6 +87,28 @@ project_directory/
 
 Mod information is located in the `mod.json` file in the root directory. The file is expected to contain a single key-less dictionary value.
 
+#### Mod Info example
+
+The following example is the contents of a default mod that should be located in the file `project_directory/mod.json`
+
+<details>
+ <summary><b>Click to Reveal: <code>mod.json</code></b></summary>
+
+```json
+{
+  "Mod": {
+    "name": "Acolyte's mod",
+    "author": "Acolyte",
+    "description": "Mon, 21 Mar 2022 12:00:00 GMT",
+    "titleLeft": "Acolyte's",
+    "titleRight": "Mod!",
+    "subtitleLeft": "",
+    "subtitleRight": ""
+  }
+}
+```
+</details>
+
 ### Constants
 
 Constants are located in the `constants` directory. There are 8 constant files:
@@ -106,6 +131,12 @@ Icons are located in the `icons` directory. Sub-directories are acceptable, but 
 
 An icon is generated from a json file where the icon entry uses the file name without the file extension. Each icon file is expected to contain a single key-less dictionary value.
 
+#### Icon Example
+
+There is no icon example due to copyright concerns. Look at other examples e.g. [Map Example](#map-example) to get an idea of how to format it.
+
+An icon `.json` file would be located in the `project_directory/icons/` directory.
+
 ### Maps
 
 Maps are located in the `maps` directory. Sub-directories are acceptable, but not important.
@@ -114,7 +145,10 @@ A map is generated from a json file where the map entry uses the file name witho
 
 #### Map Example
 
-The following examples is the contents of the Mirrors map (as of the time of writing) that might be located in the file `project_directory/maps/mirrors.json`
+The following examples is the contents of the Mirrors map (as of this writing) that might be located in the file `project_directory/maps/mirrors.json`
+
+<details>
+ <summary><b>Click to Reveal: <code>mirrors.json</code></b></summary>
 
 ```json
 {
@@ -136,12 +170,75 @@ The following examples is the contents of the Mirrors map (as of the time of wri
   "numPoints": 7
 }
 ```
+</details>
 
 ### Obstacles
 
 Obstacles are located in the `obstacles` directory. Sub-directories are acceptable, but not important.
 
 An obstacle is generated from a json file where the obstacle entry uses the file name without the file extension. Each obstacle file is expected to contain a single key-less dictionary value.
+
+#### Obstacle Example
+
+The following example is the contents of the vanilla healing pool (as of this writing) that might be located in the file `project_directory/sounds/fireball.json`
+
+<details>
+  <summary><b>Click to Reveal: <code>healing.json</code></b></summary>
+
+```json
+{
+  "id": "healing",
+  "health": 50,
+  "collideWith": 9,
+  "sensor": true,
+  "static": true,
+  "undamageable": true,
+  "strike": {
+    "ticks": 15,
+    "flash": true
+  },
+  "hitInterval": 15,
+  "selfDamage": 1,
+  "decayPerSecond": 2,
+  "render": [
+    {
+      "type": "solid",
+      "color": "#0f9e",
+      "deadColor": "#0f94",
+      "glow": 0.2
+    },
+    {
+      "type": "smoke",
+      "color": "#0f9",
+      "particleRadius": 0.005,
+      "fade": "#0000",
+      "bloom": 0.01,
+      "glow": 0.05,
+      "ticks": 30,
+      "interval": 8,
+      "speed": 0.1
+    }
+  ],
+  "buffs": [
+    {
+      "type": "burn",
+      "maxTicks": 15,
+      "collideWith": 65535,
+      "packet": {
+        "damage": -1,
+        "lifeSteal": 0,
+        "noKnockback": true,
+        "noHit": true,
+        "isLava": true
+      },
+      "hitInterval": 5,
+      "stack": "healing",
+      "maxStacks": 1
+    }
+  ]
+}
+```
+</details>
 
 ### Projectiles
 
@@ -161,7 +258,10 @@ A projectile is generated from a json file where the projectile template name us
 
 #### Projectile Example
 
-The following example is the contents of the Fireball's projectile dictionary (as of the time this was written) that might be located in the file `project_directory/projectiles/fireball.json`
+The following example is the contents of the Fireball's projectile dictionary (as of this writing) that might be located in the file `project_directory/projectiles/fireball.json`
+
+<details>
+  <summary><b>Click to Reveal: <code>fireball.json</code></b></summary>
 
 ```json
 {
@@ -198,6 +298,7 @@ The following example is the contents of the Fireball's projectile dictionary (a
   ]
 }
 ```
+</details>
 
 ### Sounds
 
@@ -207,7 +308,10 @@ A sound is generated from a json file where the sound entry uses the file name w
 
 #### Sound Example
 
-The following example is the contents of the vanilla Fireball's sound effect (as of the time this was written) that might be located in the file `project_directory/sounds/fireball.json`
+The following example is the contents of the vanilla Fireball's sound effect (as of this writing) that might be located in the file `project_directory/sounds/fireball.json`
+
+<details>
+  <summary><b>Click to Reveal: <code>fireball.json</code></b></summary>
 
 ```json
 {
@@ -224,6 +328,7 @@ The following example is the contents of the vanilla Fireball's sound effect (as
   ]
 }
 ```
+</details>
 
 ### Spells
 
@@ -234,6 +339,9 @@ A spell is generated from a json file where the spell entry uses the file name w
 #### Spell Example
 
 The following example is the contents of the vanilla Fireball (as of this writing) that might be located in the file `project_directory/spells/fireball.json`
+
+<details>
+ <summary><b>Click to Reveal: <code>fireball.json</code></b></summary>
 
 ```json
 {
@@ -280,6 +388,7 @@ The following example is the contents of the vanilla Fireball (as of this writin
   }
 }
 ```
+</details>
 
 Note that the dictionary value of `"projectile"` could be replaced with a [Projectile Template](#projectiles) string (e.g. `"projectile": "ProjectileTemplate:fireball.json"`) to condense things here.
 

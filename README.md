@@ -256,6 +256,8 @@ Projectile Templates are located in the `projectiles` directory. Sub-directories
 
 A projectile is generated from a json file where the projectile template name uses the file name without the file extension. Each projectile file is expected to contain a single key-less dictionary value.
 
+To avoid infinite loops, there is a limit to how many projectiles deep a projectile can spawn from a `spawn` behaviour. By default this is 20, but can be overwritten with the `--max-projectile-depth` argument. Be warned that sufficiently deep recursive projectiles *can* contribute to a very large compiled file size.
+
 #### Projectile Example
 
 The following example is the contents of the Fireball's projectile dictionary (as of this writing) that might be located in the file `project_directory/projectiles/fireball.json`
@@ -396,4 +398,6 @@ Note that the dictionary value of `"projectile"` could be replaced with a [Proje
 
 AFModCompiler checks for the key `"basedOn"` and uses its value (formatted as a file name without the extension) to generate a base object that the settings then overwrite.
 
-One thing to keep in mind is that you can only replace values in the root, so attempting to add something to a nested dictionary or list will not work.
+One thing to keep in mind is that you can only replace values in the root, so attempting to add something to a nested dictionary or list (e.g. a `"renderers"` list in a projectile) will instead overwrite it. Additionally, the compiler only searches a root object and will not search nested objects.
+
+It is possible to parent an object from an object that itself has a parent. There is a limit of 50 (that can be overwritten with the `--max-parent-depth` argument) to avoid infinite loops.

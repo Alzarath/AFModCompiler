@@ -1,6 +1,24 @@
 # AFModCompiler
 The Acolyte Fight Mod Compiler. Used to compile Acolyte Fight mod projects into a single playable json file.
 
+## Table of Contents
+
+* [Usage](#usage)
+* [Project Structure](#project-structure)
+  * [Mod Info](#mod-info)
+  * [Constants](#constants)
+  * [Icons](#icons)
+  * [Maps](#maps)
+    * [Example](#map-example)
+  * [Obstacles](#obstacles)
+  * [Projectiles](#projectiles)
+    * [Example](#projectile-example)
+  * [Sounds](#sounds)
+    * [Example](#sound-example)
+  * [Spells](#spells)
+    * [Example](#spell-example)
+* [Parenting](#parenting)
+
 ## Usage
 ```
 usage: AFModCompiler.py [-h] [--output, -o [OUTPUT_FILE]]
@@ -28,11 +46,11 @@ options:
                         infinite loops
 ```
 
-## Expectations
+## Project Structure
 
 A mod project is expected to follow a specific directory and file sturcture, although no singular file or directory is required.
 
-The project directory name does not matter, but the files `mod.json` and all constants must have their appropriate names to be included. Objects in the other folders do not need to follow any particular naming scheme, but object names should be addressed consistently when it comes to parenting and templating.
+The project directory name does not matter, but the files `mod.json` and all constants must have their appropriate names to be included. Objects in the other folders do not need to follow any particular naming scheme, but object names should be addressed consistently when it comes to parenting and templating. An example of a project directory and file structure is as follows:
 
 ```
 project_directory/
@@ -94,6 +112,31 @@ Maps are located in the `maps` directory. Sub-directories are acceptable, but no
 
 A map is generated from a json file where the map entry uses the file name without the file extension. Each map file is expected to contain a single key-less dictionary value.
 
+#### Map Example
+
+The following examples is the contents of the Mirrors map (as of the time of writing) that might be located in the file `project_directory/maps/mirrors.json`
+
+```json
+{
+  "id": "mirrors",
+  "color": "#41334d",
+  "background": "#25192e",
+  "obstacles": [
+    {
+      "type": "mirror",
+      "numObstacles": 7,
+      "layoutRadius": 0.22,
+      "layoutAngleOffsetInRevs": 0,
+      "numPoints": 4,
+      "extent": 0.005,
+      "orientationAngleOffsetInRevs": 0,
+      "angularWidthInRevs": 0.05
+    }
+  ],
+  "numPoints": 7
+}
+```
+
 ### Obstacles
 
 Obstacles are located in the `obstacles` directory. Sub-directories are acceptable, but not important.
@@ -116,17 +159,129 @@ Projectile Templates are located in the `projectiles` directory. Sub-directories
 
 A projectile is generated from a json file where the projectile template name uses the file name without the file extension. Each projectile file is expected to contain a single key-less dictionary value.
 
+#### Projectile Example
+
+The following example is the contents of the Fireball's projectile dictionary (as of the time this was written) that might be located in the file `project_directory/projectiles/fireball.json`
+
+```json
+{
+  "density": 25,
+  "radius": 0.003,
+  "speed": 0.6,
+  "maxTicks": 90,
+  "damage": 16,
+  "lifeSteal": 0.3,
+  "categories": 2,
+  "sound": "fireball",
+  "soundHit": "standard",
+  "color": "#f80",
+  "renderers": [
+    {
+      "type": "bloom",
+      "radius": 0.045
+    },
+    {
+      "type": "projectile",
+      "ticks": 30,
+      "smoke": 0.05
+    },
+    {
+      "type": "ray",
+      "ticks": 30
+    },
+    {
+      "type": "strike",
+      "ticks": 30,
+      "flash": true,
+      "numParticles": 5
+    }
+  ]
+}
+```
+
 ### Sounds
 
 Sounds are located in the `sounds` directory. Sub-directories are acceptable, but not important.
 
 A sound is generated from a json file where the sound entry uses the file name without the file extension. Each sound file is expected to contain a single key-less dictionary value.
 
+#### Sound Example
+
+The following example is the contents of the vanilla Fireball's sound effect (as of the time this was written) that might be located in the file `project_directory/sounds/fireball.json`
+
+```json
+{
+  "id": "fireball",
+  "sustain": [
+    {
+      "stopTime": 1.5,
+      "attack": 0.25,
+      "decay": 0.25,
+      "highPass": 432,
+      "lowPass": 438,
+      "wave": "brown-noise"
+    }
+  ]
+}
+```
+
 ### Spells
 
 Spells are located in the `spells` directory. Sub-directories are acceptable, but not important.
 
 A spell is generated from a json file where the spell entry uses the file name without the file extension. Each spell file is expected to contain a single key-less dictionary value.
+
+#### Spell Example
+
+The following example is the contents of the vanilla Fireball (as of this writing) that might be located in the file `project_directory/spells/fireball.json`
+
+```json
+{
+  "id": "fireball",
+  "description": "Quick cooldown and packs a punch. Good old trusty fireball.",
+  "action": "projectile",
+  "color": "#f80",
+  "icon": "thunderball",
+  "maxAngleDiffInRevs": 0.01,
+  "cooldown": 90,
+  "throttle": true,
+  "projectile": {
+    "density": 25,
+    "radius": 0.003,
+    "speed": 0.6,
+    "maxTicks": 90,
+    "damage": 16,
+    "lifeSteal": 0.3,
+    "categories": 2,
+    "sound": "fireball",
+    "soundHit": "standard",
+    "color": "#f80",
+    "renderers": [
+      {
+        "type": "bloom",
+        "radius": 0.045
+      },
+      {
+        "type": "projectile",
+        "ticks": 30,
+        "smoke": 0.05
+      },
+      {
+        "type": "ray",
+        "ticks": 30
+      },
+      {
+        "type": "strike",
+        "ticks": 30,
+        "flash": true,
+        "numParticles": 5
+      }
+    ]
+  }
+}
+```
+
+Note that the dictionary value of `"projectile"` could be replaced with a [Projectile Template](#projectiles) string (e.g. `"projectile": "ProjectileTemplate:fireball.json"`) to condense things here.
 
 ## Parenting
 

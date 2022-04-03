@@ -26,7 +26,7 @@ The Acolyte Fight Mod Compiler. Used to compile Acolyte Fight mod projects into 
 
 ### Requirements
 
-[Python version 3.4 or higher](https://www.python.org/downloads/)
+* [Python version 3.4 or higher](https://www.python.org/downloads/)
 
 ### Instructions
 
@@ -189,7 +189,7 @@ An obstacle is generated from a json file where the obstacle entry uses the file
 
 #### Obstacle Example
 
-The following example is the contents of the vanilla healing pool (as of this writing) that might be located in the file **project_directory/sounds/fireball.json**
+The following example is the contents of the vanilla healing pool (as of this writing) that might be located in the file **project_directory/obstacles/healing.json**
 
 <details>
   <summary><b>Click to Reveal: <code>healing.json</code></b></summary>

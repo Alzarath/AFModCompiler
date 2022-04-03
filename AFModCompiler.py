@@ -175,21 +175,24 @@ def main():
 	project_directory = Path(args.project_directory)
 
 	# Process all the mod data
-	mod_info = get_mod_info(project_directory.joinpath("mod.json"))
-	constant_info = get_constants(project_directory.joinpath("constants"))
+	mod_path = project_directory.joinpath("mod.json")
+	constant_path = project_directory.joinpath("constants")
+	projectile_path = project_directory.joinpath("projectiles")
+	spell_path = project_directory.joinpath("spells")
+	obstacle_path = project_directory.joinpath("obstacles")
+	map_path = project_directory.joinpath("maps")
+	sound_path = project_directory.joinpath("sounds")
+	icon_path = project_directory.joinpath("icons")
 
-	projectile_data = get_data(project_directory.joinpath("projectiles"))
-	processed_projectiles = process_projectiles(projectile_data)
-	spell_data = get_data(project_directory.joinpath("spells"))
-	processed_spells = process_spells(spell_data, processed_projectiles)
-	obstacle_data = get_data(project_directory.joinpath("obstacles"))
-	processed_obstacles = process_parents(obstacle_data)
-	map_data = get_data(project_directory.joinpath("maps"))
-	processed_maps = process_parents(map_data)
-	sound_data = get_data(project_directory.joinpath("sounds"))
-	processed_sounds = process_parents(sound_data)
-	icon_data = get_data(project_directory.joinpath("icons"))
-	processed_icons = process_parents(icon_data)
+	mod_info = get_mod_info(mod_path) if mod_path.exists() and not mod_path.is_dir() else {}
+	constant_info = get_constants(constant_path) if constant_path.exists() and constant_path.is_dir() else {}
+
+	processed_projectiles = process_projectiles(get_data(projectile_path)) if projectile_path.exists() and projectile_path.is_dir() else {}
+	processed_spells = process_spells(get_data(spell_path), processed_projectiles) if spell_path.exists() and spell_path.is_dir() else {}
+	processed_obstacles = process_parents(get_data(obstacle_path)) if obstacle_path.exists() and obstacle_path.is_dir() else {}
+	processed_maps = process_parents(get_data(map_path)) if map_path.exists() and map_path.is_dir() else {}
+	processed_sounds = process_parents(get_data(sound_path)) if sound_path.exists() and sound_path.is_dir() else {}
+	processed_icons = process_parents(get_data(icon_path)) if icon_path.exists() and icon_path.is_dir() else {}
 
 	# Format the mod data into a json
 	mod_data = {}

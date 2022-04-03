@@ -24,7 +24,13 @@ The Acolyte Fight Mod Compiler. Used to compile Acolyte Fight mod projects into 
 
 ## Usage
 
-TL;DR: Copy AFModCompiler.py to the mod project directory. Open a terminal. `cd` into the mod project directory. Run `python AFModCompiler.py`. It will generate a mod json file called mod_output.json by default. Load it in Acolyte Fight and play.
+### Requirements
+
+[Python version 3.4 or higher](https://www.python.org/downloads/)
+
+### Instructions
+
+TL;DR: Copy AFModCompiler.py to the mod project directory. Open a terminal/command prompt. `cd` into the mod project directory. Run `python AFModCompiler.py`. It will generate a mod json file called mod_output.json by default. Load it in Acolyte Fight and play.
 
 ```
 usage: AFModCompiler.py [-h] [--output, -o [OUTPUT_FILE]]

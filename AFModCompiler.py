@@ -1,6 +1,7 @@
 from pathlib import Path
 import json
 import argparse
+import sys
 
 parser = argparse.ArgumentParser(description='Process a mod project')
 parser.add_argument('--output, -o', type=str, nargs='?',
@@ -37,9 +38,11 @@ def get_data(directory):
 
 	data_files = get_jsons(directory)
 
+	if len(data_files) == 0:
+		return None
+
 	for file in data_files:
-		file_text = file.read_text()
-		file_json = json.loads(file_text)
+		file_json = parse_json_from_file(file)
 		data_name = file.stem
 		returned_data[data_name] = file_json.copy()
 
@@ -55,50 +58,63 @@ def get_constants(directory):
 
 	# Audio constants
 	audio_file = directory.joinpath("audio.json")
-	if audio_file.exists() and not audio_file.is_dir():
-		constant_info["Audio"] = json.loads(audio_file.read_text())
+	audio_data = parse_json_from_file(audio_file)
+	if audio_data:
+		constant_info["Audio"] = audio_data
 
 	# Choices constants
 	choices_file = directory.joinpath("choices.json")
-	if choices_file.exists() and not choices_file.is_dir():
-		constant_info["Choices"] = json.loads(choices_file.read_text())
+	choices_data = parse_json_from_file(choices_file)
+	if choices_data:
+		constant_info["Choices"] = parse_json_from_file(choices_file)
 
 	# Hero constants
 	hero_file = directory.joinpath("hero.json")
-	if hero_file.exists() and not hero_file.is_dir():
-		constant_info["Hero"] = json.loads(hero_file.read_text())
+	hero_data = parse_json_from_file(hero_file)
+	if hero_data:
+		constant_info["Hero"] = parse_json_from_file(hero_file)
 
 	# Matchmaking constants
 	matchmaking_file = directory.joinpath("matchmaking.json")
-	if matchmaking_file.exists() and not matchmaking_file.is_dir():
-		constant_info["Matchmaking"] = json.loads(matchmaking_file.read_text())
+	matchmaking_data = parse_json_from_file(matchmaking_file)
+	if matchmaking_data:
+		constant_info["Matchmaking"] = parse_json_from_file(matchmaking_file)
 
 	# Obstacle constants
 	obstacle_file = directory.joinpath("obstacle.json")
-	if obstacle_file.exists() and not obstacle_file.is_dir():
-		constant_info["Obstacle"] = json.loads(obstacle_file.read_text())
+	obstacle_data = parse_json_from_file(obstacle_file)
+	if obstacle_data:
+		constant_info["Obstacle"] = parse_json_from_file(obstacle_file)
 
 	# Tips list
 	tips_file = directory.joinpath("tips.json")
-	if tips_file.exists() and not tips_file.is_dir():
-		constant_info["Tips"] = json.loads(tips_file.read_text())
+	tips_data = parse_json_from_file(tips_file)
+	if tips_data:
+		constant_info["Tips"] = parse_json_from_file(tips_file)
 
 	# Visuals constants
 	visuals_file = directory.joinpath("visuals.json")
-	if visuals_file.exists() and not visuals_file.is_dir():
-		constant_info["Visuals"] = json.loads(visuals_file.read_text())
+	visuals_data = parse_json_from_file(visuals_file)
+	if visuals_data:
+		constant_info["Visuals"] = parse_json_from_file(visuals_file)
 
 	# World constants
 	world_file = directory.joinpath("world.json")
-	if world_file.exists() and not world_file.is_dir():
-		constant_info["World"] = json.loads(world_file.read_text())
+	world_data = parse_json_from_file(world_file)
+	if world_data:
+		constant_info["World"] = parse_json_from_file(world_file)
 
 	return constant_info
 
-def get_mod_info(path):
+def parse_json_from_file(path):
+	returned_value = None
 	if path.exists() and not path.is_dir():
-		return json.loads(path.read_text())
-	return {}
+		try:
+			returned_value = json.loads(path.read_text())
+		except json.decoder.JSONDecodeError as e:
+			print(f"JSON Error in {path.resolve()}\n{e}")
+			sys.exit(1)
+	return returned_value
 
 def template_projectile(spell, projectiles):
 	returned_spell = spell.copy()
@@ -184,26 +200,32 @@ def main():
 	sound_path = project_directory.joinpath("sounds")
 	icon_path = project_directory.joinpath("icons")
 
-	mod_info = get_mod_info(mod_path) if mod_path.exists() and not mod_path.is_dir() else {}
-	constant_info = get_constants(constant_path) if constant_path.exists() and constant_path.is_dir() else {}
+	mod_info = parse_json_from_file(mod_path) if mod_path.exists() and not mod_path.is_dir() else None
+	constant_info = get_constants(constant_path) if constant_path.exists() and constant_path.is_dir() else None
 
-	processed_projectiles = process_projectiles(get_data(projectile_path)) if projectile_path.exists() and projectile_path.is_dir() else {}
-	processed_spells = process_spells(get_data(spell_path), processed_projectiles) if spell_path.exists() and spell_path.is_dir() else {}
-	processed_obstacles = process_parents(get_data(obstacle_path)) if obstacle_path.exists() and obstacle_path.is_dir() else {}
-	processed_maps = process_parents(get_data(map_path)) if map_path.exists() and map_path.is_dir() else {}
-	processed_sounds = process_parents(get_data(sound_path)) if sound_path.exists() and sound_path.is_dir() else {}
-	processed_icons = process_parents(get_data(icon_path)) if icon_path.exists() and icon_path.is_dir() else {}
+	processed_projectiles = process_projectiles(get_data(projectile_path)) if projectile_path.exists() and projectile_path.is_dir() else None
+	processed_spells = process_spells(get_data(spell_path), processed_projectiles) if spell_path.exists() and spell_path.is_dir() else None
+	processed_obstacles = process_parents(get_data(obstacle_path)) if obstacle_path.exists() and obstacle_path.is_dir() else None
+	processed_maps = process_parents(get_data(map_path)) if map_path.exists() and map_path.is_dir() else None
+	processed_sounds = process_parents(get_data(sound_path)) if sound_path.exists() and sound_path.is_dir() else None
+	processed_icons = process_parents(get_data(icon_path)) if icon_path.exists() and icon_path.is_dir() else None
 
 	# Format the mod data into a json
 	mod_data = {}
-	mod_data["Mod"] = mod_info
+	if mod_info:
+		mod_data["Mod"] = mod_info
 	for constant_index, constant_values in constant_info.items():
 		mod_data[constant_index] = constant_values
-	mod_data["Spells"] = processed_spells
-	mod_data["Layouts"] = processed_maps
-	mod_data["ObstacleTemplates"] = processed_obstacles
-	mod_data["Sounds"] = processed_sounds
-	mod_data["Icons"] = processed_icons
+	if processed_spells:
+		mod_data["Spells"] = processed_spells
+	if processed_maps:
+		mod_data["Layouts"] = processed_maps
+	if processed_obstacles:
+		mod_data["ObstacleTemplates"] = processed_obstacles
+	if processed_sounds:
+		mod_data["Sounds"] = processed_sounds
+	if processed_icons:
+		mod_data["Icons"] = processed_icons
 
 	# Export the mod data to the specified file
 	mod_file = Path(args.output_file)

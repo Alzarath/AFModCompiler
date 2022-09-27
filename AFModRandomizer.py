@@ -116,13 +116,10 @@ def parse_json_from_file(path):
 			sys.exit(1)
 	return returned_value
 
-def template_projectile(spell, projectiles):
-	returned_spell = spell.copy()
-
-	if type(returned_spell["projectile"]) is str:
-		returned_spell["projectile"] = list(projectiles.values())[randint(0, len(projectiles)-1)].copy()
-
-	return returned_spell
+def template_projectile(projectile, projectiles):
+	projectile_template = projectile.replace("ProjectileTemplate:", "")
+	
+	return list(projectiles.values())[randint(0, len(projectiles)-1)].copy()
 
 def template_projectile_spawners(projectile, projectiles, spawner_depth = 0):
 	returned_projectile = projectile.copy()
@@ -152,8 +149,13 @@ def process_spells(spells, projectiles):
 	returned_spells = process_parents(spells)
 
 	for spell_index, spell_data in returned_spells.items():
-		if spell_data.get("projectile"):
-			returned_spells[spell_index] = template_projectile(spell_data, projectiles)
+		if spell_data.get("projectile") and type(spell_data["projectile"]) is str:
+			spell_data["projectile"] = template_projectile(spell_data["projectile"], projectiles)
+
+		if spell_data.get("releaseBehaviours"):
+			for behaviour in spell_data["releaseBehaviours"]:
+				if behaviour["type"] == "spawn" and type(behaviour["projectile"]) is str:
+					behaviour["projectile"] = template_projectile(behaviour["projectile"], projectiles)
 
 	return returned_spells
 

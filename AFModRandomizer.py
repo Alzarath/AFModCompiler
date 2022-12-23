@@ -157,6 +157,11 @@ def process_spells(spells, projectiles):
 				if behaviour["type"] == "spawn" and type(behaviour["projectile"]) is str:
 					behaviour["projectile"] = template_projectile(behaviour["projectile"], projectiles)
 
+		if spell_data.get("behaviours"):
+			for behaviour in spell_data["behaviours"]:
+				if behaviour["type"] == "spawn" and type(behaviour["projectile"]) is str:
+					behaviour["projectile"] = template_projectile(behaviour["projectile"], projectiles)
+
 	return returned_spells
 
 def process_parents(data):

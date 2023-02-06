@@ -127,7 +127,7 @@ def template_projectile_spawners(projectile, projectiles, spawner_depth = 0):
 		return returned_projectile
 	popped_items = []
 	for behaviour_index, behaviour_data in reversed(list(enumerate(returned_projectile["behaviours"].copy()))):
-		if behaviour_data["type"] == "spawn" and type(behaviour_data["projectile"]) is str:
+		if behaviour_data["type"] == "spawn" and type(behaviour_data.get("projectile")) is str:
 			if spawner_depth >= args.max_projectile_depth:
 				popped_items.append(behaviour_index)
 				continue
@@ -149,17 +149,17 @@ def process_spells(spells, projectiles):
 	returned_spells = process_parents(spells)
 
 	for spell_index, spell_data in returned_spells.items():
-		if spell_data.get("projectile") and type(spell_data["projectile"]) is str:
+		if spell_data.get("projectile") and type(spell_data.get("projectile")) is str:
 			spell_data["projectile"] = template_projectile(spell_data["projectile"], projectiles)
 
 		if spell_data.get("releaseBehaviours"):
 			for behaviour in spell_data["releaseBehaviours"]:
-				if behaviour["type"] == "spawn" and type(behaviour["projectile"]) is str:
+				if behaviour["type"] == "spawn" and type(behaviour.get("projectile")) is str:
 					behaviour["projectile"] = template_projectile(behaviour["projectile"], projectiles)
 
 		if spell_data.get("behaviours"):
 			for behaviour in spell_data["behaviours"]:
-				if behaviour["type"] == "spawn" and type(behaviour["projectile"]) is str:
+				if behaviour["type"] == "spawn" and type(behaviour.get("projectile")) is str:
 					behaviour["projectile"] = template_projectile(behaviour["projectile"], projectiles)
 
 	return returned_spells
